@@ -90,7 +90,8 @@ public class LogTable extends JTable implements FilterListener, LogEntryListener
     {
         Component c = super.prepareRenderer(renderer, row, column);
         LogEntry entry = this.getModel().getRow(convertRowIndexToModel(row));
-
+        if (entry == null)
+            return c;
         if(this.getSelectedRow() == row){
             c.setBackground(this.getSelectionBackground());
             c.setForeground(this.getSelectionForeground());
@@ -271,9 +272,10 @@ public class LogTable extends JTable implements FilterListener, LogEntryListener
         int row = ((LogEntry.PendingRequestEntry) existingEntry).getLogRow();
         if(row == -1) return;
         LogManager logManager = LoggerPlusPlus.getInstance().getLogManager();
+//        getModel().fireTableRowsUpdated(row, row);
         if(logManager.getLogEntries().size() == logManager.getMaximumEntries()) {
             int newRow = ((LogEntry.PendingRequestEntry) existingEntry).getLogRow() - logManager.getMaximumEntries() - logManager.getTotalRequests();
-            getModel().fireTableRowsUpdated(newRow - 10, Math.min(logManager.getMaximumEntries(), newRow + 10));
+            getModel().fireTableRowsUpdated(newRow - 1, Math.min(logManager.getMaximumEntries(), newRow + 1));
         }else{
             getModel().fireTableRowsUpdated(row, row);
         }
