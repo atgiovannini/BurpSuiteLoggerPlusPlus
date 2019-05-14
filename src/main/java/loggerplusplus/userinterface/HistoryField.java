@@ -58,6 +58,7 @@ public class HistoryField extends JComboBox {
 
     public void setColor(Color color){
         ((JComponent) this.getEditor().getEditorComponent()).setOpaque(false);
+        this.getEditor().getEditorComponent().setForeground(Color.BLACK);
         this.getEditor().getEditorComponent().setBackground(color);
     }
 

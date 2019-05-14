@@ -10,3 +10,7 @@ TODO
 build.xml
 hs_err_*.log
 build/libs/burplogger++.jar
+**/*.class
+local.properties
+**/*MANIFEST.MF
+build/tmp/jar/MANIFEST.MF
